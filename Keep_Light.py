@@ -6,6 +6,7 @@ import pyHook
 import time
 import thread
 import sys
+SLEEP_TIME = 250 #4分钟
 
 '''
 FLAG = 0
@@ -31,15 +32,15 @@ def watchKeyboard():
 '''
 # 模拟按键输入的线程
 def keyPress():
-	# 最多执行40分钟
-	for i in range(1,10):
+
+	while True:
 		win32api.keybd_event(20,0,0,0) #CapsLock键码:20 
 		win32api.keybd_event(20,0,win32con.KEYEVENTF_KEYUP,0) #释放按键
-		time.sleep(250)
+		time.sleep(SLEEP_TIME)
 	return
 
  
-str = "已开启常亮模式，默认持续时间40分钟，关闭窗口可终止"
+str = "已开启常亮模式，关闭窗口可退出"
 # 解决控制台输出中文乱码问题
 print str.decode('UTF-8')
 keyPress()
